@@ -16,9 +16,13 @@
 </p>
 
 <p>
-  <strong>City:</strong>
-  <%= @item.city_id %>
+  <strong>City location:</strong>
+  <td><%= city = City.find(@item.city_id).name %></td>
 </p>
-
+<p>
+	<strong>Current weather</strong>
+        <td><% response = HTTParty.get("https://api.openweathermap.org/data/2.5/weather?q=#{city}&appid=#{ENV["API_KEY"]}")%><%= response["weather"][0]["description"] %>
+        </td>
+</p>
 <%= link_to 'Edit', edit_item_path(@item) %> |
 <%= link_to 'Back', items_path %>

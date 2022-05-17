@@ -21,8 +21,14 @@
 </p>
 <p>
 	<strong>Current weather</strong>
-        <td><% response = HTTParty.get("https://api.openweathermap.org/data/2.5/weather?q=#{city}&appid=#{ENV["API_KEY"]}")%><%= response["weather"][0]["description"] %>
-        </td>
+        <% response = HTTParty.get("https://api.openweathermap.org/data/2.5/weather?q=#{city}&appid=#{ENV["API_KEY"]}")%>
+        <%= response["weather"][0]["description"] %>
 </p>
+
+
+<% @item.images.each do |image| %>
+  <%= image_tag(image, size: '500') %>
+<% end %>
+
 <%= link_to 'Edit', edit_item_path(@item) %> |
 <%= link_to 'Back', items_path %>

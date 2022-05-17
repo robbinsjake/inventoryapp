@@ -26,6 +26,12 @@
         <td><%= city = City.find(item.city_id).name %></td>
         <td><% response = HTTParty.get("https://api.openweathermap.org/data/2.5/weather?q=#{city}&appid=#{ENV["API_KEY"]}")%><%= response["weather"][0]["description"] %>
         </td>
+        <td>
+          <% item.images.each do |image| %>
+            <%= image_tag image.variant(resize_to_limit: [80, nil]) %>
+          <% end %>
+        </td>
+
         <td><%= link_to 'Show', item %></td>
         <td><%= link_to 'Edit', edit_item_path(item) %></td>
         <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>

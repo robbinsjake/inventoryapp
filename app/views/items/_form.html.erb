@@ -29,6 +29,21 @@
    <div class="field">
 <%= form.collection_select(:city_id, City.all, :id, :name, {:prompt => 'Select city location'}, :selected => @item.city_id ) %>
   </div>
+  
+  <div clas="field">
+    <%= form.file_field :images, multiple: true %>
+  </div>
+<% if @item.images.present? %>
+
+  <div id= "delete_images"> <h1>Select Images you would like to DELETE:</h1>
+    <% @item.images.each do |image| %>
+      <%= image_tag(image, size: '100') %>
+
+      <%= form.check_box :image_ids, {multiple: true}, image.id, false %>
+    <% end %>
+    </div>
+
+<% end %>
 
   <div class="actions">
     <%= form.submit %>
